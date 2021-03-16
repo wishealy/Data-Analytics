@@ -1,13 +1,27 @@
-Version: 1.0
+airquality<-airquality
+colnames(airquality)
+#AQ is variable for air quality
+AQ<-airquality
+head(AQ,6)
+summary(AQ)
 
-RestoreWorkspace: Default
-SaveWorkspace: Default
-AlwaysSaveHistory: Default
+#AQOz is variable for air quality ozone levels in numeric omitting NA's
+AQOz<-as.numeric(na.omit(AQ$Ozone))
 
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 2
-Encoding: UTF-8
+#RangeOZ is variable that is the range of Maximum and Minimum ozone levels
+rangeOz<-max(AQOz)-min(AQOz)
+rangeOz
+Summary(AQOz)
+hist(AQOz,main='Frequency of Ozone Levels',xlab='Ozone Level Concentraitons')
+boxplot(AQOz,main='Ozone Levels',ylab='Ozone Level Concentrations')
 
-RnwWeave: Sweave
-LaTeX: pdfLaTeX
+#AQW is variable for air quality wind speed 
+AQW<-AQ$Wind
+rangeWind<-max(AQW)-min(AQW)
+Summary(AQW)
+hist(AQW,main='HIstogram of Wind Speeds',xlab='Wind Speeds')
+boxplot(AQW,main='Box and Whisker Plot of Wind Speed',ylab='Wind Speed')
+
+#Correlation Between Ozone and Wind Speed w/ Scatterplot
+cor.test(airquality$Ozone,airquality$Wind)
+scatter.smooth(airquality$Ozone,airquality$Wind,main='Ozone Levels vs Wind Speed',xlab='Ozone',ylab='Wind')
